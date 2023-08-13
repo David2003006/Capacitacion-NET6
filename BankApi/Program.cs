@@ -1,4 +1,7 @@
 using BankApi.Data;
+using Microsoft.EntityFrameworkCore;
+
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,7 +12,18 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-//builder.Services.addSqlServer<BankContext>(builder.Configuration.GetConectionString("BankConection"));
+string? connectionString = builder.Configuration.GetConnectionString("BankConection");
+if (!string.IsNullOrEmpty(connectionString))
+{
+    // Aquí puedes usar la cadena de conexión de manera segura
+    builder.Services.AddDbContext<BankContext>(options =>
+    {
+        options.UseMySql(
+            connectionString,
+            new MySqlServerVersion(new Version(8, 0, 19))
+        );
+    });
+}
 
 var app = builder.Build();
 

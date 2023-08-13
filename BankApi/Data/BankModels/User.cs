@@ -14,6 +14,4 @@ public partial class User
     public string? Email { get; set; }
 
     public DateTime? RegDate { get; set; }
-
-    public virtual ICollection<Account> Accounts { get; set; } = new List<Account>();
 }

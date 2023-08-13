@@ -26,9 +26,9 @@ public partial class BankContext : DbContext
 
     public virtual DbSet<User> Users { get; set; }
 
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+   /* protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseMySql("server=localhost;database=bank;uid=root;pwd=root", Microsoft.EntityFrameworkCore.ServerVersion.Parse("8.0.19-mysql"));
+        => optionsBuilder.UseMySql("server=localhost;database=bank;uid=root;pwd=root", Microsoft.EntityFrameworkCore.ServerVersion.Parse("8.0.19-mysql"));*/
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -38,7 +38,7 @@ public partial class BankContext : DbContext
 
         modelBuilder.Entity<Account>(entity =>
         {
-            entity.HasKey(e => e.ID).HasName("PRIMARY");
+            entity.HasKey(e => e.Id).HasName("PRIMARY");
 
             entity.ToTable("account");
 
@@ -46,24 +46,12 @@ public partial class BankContext : DbContext
 
             entity.HasIndex(e => e.ClientId, "ClientID");
 
-            entity.Property(e => e.ID)
-                .ValueGeneratedNever()
-                .HasColumnName("iD");
+            entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.Balance).HasPrecision(10, 2);
             entity.Property(e => e.ClientId).HasColumnName("ClientID");
             entity.Property(e => e.RegDate)
                 .HasDefaultValueSql("CURRENT_TIMESTAMP")
                 .HasColumnType("datetime");
-
-            entity.HasOne(d => d.AccountTypeNavigation).WithMany(p => p.Accounts)
-                .HasForeignKey(d => d.AccountType)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("account_ibfk_1");
-
-            entity.HasOne(d => d.Client).WithMany(p => p.Accounts)
-                .HasForeignKey(d => d.ClientId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("account_ibfk_2");
         });
 
         modelBuilder.Entity<Accounttype>(entity =>
@@ -72,9 +60,7 @@ public partial class BankContext : DbContext
 
             entity.ToTable("accounttype");
 
-            entity.Property(e => e.Id)
-                .ValueGeneratedNever()
-                .HasColumnName("id");
+            entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.Name).HasMaxLength(50);
             entity.Property(e => e.RegDate)
                 .HasDefaultValueSql("CURRENT_TIMESTAMP")
@@ -87,9 +73,9 @@ public partial class BankContext : DbContext
 
             entity.ToTable("bancktransaction");
 
-            entity.HasIndex(e => e.AccountId, "AccountID");
-
             entity.HasIndex(e => e.TransactionType, "TransactionType");
+
+            entity.HasIndex(e => e.AccountId, "fk_account");
 
             entity.Property(e => e.Id)
                 .ValueGeneratedNever()
@@ -103,7 +89,7 @@ public partial class BankContext : DbContext
             entity.HasOne(d => d.Account).WithMany(p => p.Bancktransactions)
                 .HasForeignKey(d => d.AccountId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("bancktransaction_ibfk_1");
+                .HasConstraintName("fk_account");
 
             entity.HasOne(d => d.TransactionTypeNavigation).WithMany(p => p.Bancktransactions)
                 .HasForeignKey(d => d.TransactionType)
