@@ -1,4 +1,5 @@
 using BankApi.Data;
+using BankApi.Services;
 using Microsoft.EntityFrameworkCore;
 
 
@@ -24,6 +25,8 @@ if (!string.IsNullOrEmpty(connectionString))
         );
     });
 }
+
+builder.Services.AddScoped<AccountServices>();
 
 var app = builder.Build();
 
