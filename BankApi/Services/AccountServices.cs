@@ -1,6 +1,8 @@
 using BankApi.Data;
 using BankApi.Data.BankModels;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
+using TestBankApi.Data.DTOs;
 
 namespace BankApi.Services;
 
@@ -13,27 +15,33 @@ public class AccountServices
         _context= context;
     }
 
-    public IEnumerable<Account> GetAll()
+    public async Task<IEnumerable<Account>> GetAll()
     {
-        return _context.Accounts.ToList();
+        return await _context.Accounts.ToListAsync();
     }
 
-    public Account? GetById(int id)
+    public async Task<Account?> GetById(int id)
     {
-        return _context.Accounts.Find(id);
+        return await _context.Accounts.FindAsync(id);
     }
 
-    public Account Create(Account newAccount)
+    public async Task<Account> Create(AccountDTO newAccountDTO)
     {
+            var newAccount= new Account();
+            
+            newAccount.AccountType= newAccountDTO.AccountType;
+            newAccount.ClientId= newAccountDTO.ClientId;
+            newAccount.Balance= newAccountDTO.Balance; 
+
             _context.Accounts.Add(newAccount);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
 
             return newAccount;
     }
 
-    public void Update(int id, Account account)
+    public async Task Update(int id, AccountDTO account)
     {
-         var existAccount= _context.Accounts.Find(id);
+         var existAccount= await GetById(id);
 
          if(existAccount is not null )
          {
@@ -41,18 +49,18 @@ public class AccountServices
                 existAccount.ClientId= account.ClientId;
                 existAccount.Balance= account.Balance;
 
-                _context.SaveChanges();
+                 await _context.SaveChangesAsync();
          }
     }
 
-    public void Delete(int id)
+    public async Task Delete(int id)
     {
-        var accountToDelte= GetById(id);
+        var accountToDelte=  await GetById(id);
 
         if(accountToDelte is not null)
         {
             _context.Accounts.Remove(accountToDelte);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
 
     }

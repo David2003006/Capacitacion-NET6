@@ -27,6 +27,8 @@ if (!string.IsNullOrEmpty(connectionString))
 }
 
 builder.Services.AddScoped<AccountServices>();
+builder.Services.AddScoped<ClientServices>();
+builder.Services.AddScoped<AccountTypeServices>();
 
 var app = builder.Build();
 
