@@ -3,11 +3,13 @@ using BankApi.Services;
 using BankApi.Data.BankModels;
 using Microsoft.AspNetCore.Mvc;
 using TestBankApi.Data.DTOs;
+using Microsoft.AspNetCore.Authorization;
 
 namespace BankApi.Controllers;
 
+[Authorize]
 [ApiController]
-[Route("[Controller]")]
+[Route("api/[Controller]")]
 public class AccountController: ControllerBase
 {
         private readonly AccountServices AccountServices;
@@ -91,12 +93,12 @@ public class AccountController: ControllerBase
             return  AccountNoFound(id);
           }
         }
-
+        [NonAction]
         public NotFoundObjectResult AccountNoFound(int id)
         {
           return NotFound(new {message= $"La cuenta con ID {id} no esxiste"});
         }
-
+        [NonAction]
         public async Task<String> ValidateAccount(AccountDTO account )
         {
             String result= "valid";

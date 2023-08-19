@@ -47,3 +47,11 @@ C:\Users\dell\Desktop\CursoNet\Capacitacion-NET6\BankApi\bin\Debug\net6.0\System
 C:\Users\dell\Desktop\CursoNet\Capacitacion-NET6\BankApi\bin\Debug\net6.0\System.Text.Encodings.Web.dll
 C:\Users\dell\Desktop\CursoNet\Capacitacion-NET6\BankApi\bin\Debug\net6.0\System.Text.Json.dll
 C:\Users\dell\Desktop\CursoNet\Capacitacion-NET6\BankApi\bin\Debug\net6.0\runtimes\browser\lib\net6.0\System.Text.Encodings.Web.dll
+C:\Users\dell\Desktop\CursoNet\Capacitacion-NET6\BankApi\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\dell\Desktop\CursoNet\Capacitacion-NET6\BankApi\bin\Debug\net6.0\Microsoft.IdentityModel.Abstractions.dll
+C:\Users\dell\Desktop\CursoNet\Capacitacion-NET6\BankApi\bin\Debug\net6.0\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\Users\dell\Desktop\CursoNet\Capacitacion-NET6\BankApi\bin\Debug\net6.0\Microsoft.IdentityModel.Logging.dll
+C:\Users\dell\Desktop\CursoNet\Capacitacion-NET6\BankApi\bin\Debug\net6.0\Microsoft.IdentityModel.Protocols.dll
+C:\Users\dell\Desktop\CursoNet\Capacitacion-NET6\BankApi\bin\Debug\net6.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+C:\Users\dell\Desktop\CursoNet\Capacitacion-NET6\BankApi\bin\Debug\net6.0\Microsoft.IdentityModel.Tokens.dll
+C:\Users\dell\Desktop\CursoNet\Capacitacion-NET6\BankApi\bin\Debug\net6.0\System.IdentityModel.Tokens.Jwt.dll

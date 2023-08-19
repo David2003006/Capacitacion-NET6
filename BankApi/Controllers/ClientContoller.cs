@@ -3,11 +3,13 @@ using BankApi.Services;
 using BankApi.Data.BankModels;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 
 namespace BankApi.Controllers
 {
+    [Authorize]
     [ApiController]
-    [Route("[Controller]")]
+    [Route("api/[Controller]")]
     public class ClientController : ControllerBase
     {
         private readonly ClientServices _services;

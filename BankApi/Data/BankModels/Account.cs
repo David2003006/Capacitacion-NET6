@@ -17,11 +17,11 @@ public partial class Account
     public DateTime RegDate { get; set; }
 
     [JsonIgnore]
-    public virtual Accounttype? AccountTypeNavigation { get; set; } = null!;
+    public virtual Accounttype AccountTypeNavigation { get; set; } = null!;
 
-     [JsonIgnore]
+    [JsonIgnore]
     public virtual ICollection<Bancktransaction> Bancktransactions { get; set; } = new List<Bancktransaction>();
-    
-     [JsonIgnore]
-    public virtual User? Client { get; set; } = null!;
+
+    [JsonIgnore]
+    public virtual User Client { get; set; } = null!;
 }

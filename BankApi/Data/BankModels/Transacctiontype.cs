@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace BankApi.Data.BankModels;
 
@@ -11,5 +12,6 @@ public partial class Transacctiontype
 
     public DateTime RegDate { get; set; }
 
+    [JsonIgnore]
     public virtual ICollection<Bancktransaction> Bancktransactions { get; set; } = new List<Bancktransaction>();
 }
